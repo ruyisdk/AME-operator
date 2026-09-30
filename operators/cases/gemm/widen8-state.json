@@ -1,0 +1,4 @@
+{
+  "operator": "gemm",
+  "contract": "widen8-state-v2"
+}

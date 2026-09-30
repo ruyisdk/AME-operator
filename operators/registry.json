@@ -1,0 +1,1571 @@
+{
+  "schema": 1,
+  "operators": [
+    {
+      "id": "gemm",
+      "description": "Row-major matrix multiplication",
+      "variants": [
+        {
+          "id": "state-edges-all-v1",
+          "case_id": 9231,
+          "fixture_generator": "operators/reference/state_edges_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/pack_i32.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_f32.h",
+            "operators/common/pack_bf16.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/STATE_EDGES_V1.md",
+          "cases": "operators/cases/gemm/state-edges.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/validate_i8.c",
+            "operators/common/validate_f32.c",
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/state_edges_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/state_edges_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "operator-state-edges-fcsr"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm",
+            "madd.ew"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-rne-fold-v1",
+          "case_id": 9191,
+          "fixture_generator": "operators/reference/fp32_numeric_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/fp32_fold.py",
+            "operators/cases/fp32-rne-witnesses.json",
+            "scripts/ieee_tininess.py",
+            "scripts/test_fused32.py",
+            "scripts/test_exponent32.py",
+            "scripts/test_sqrt32.py",
+            "reference/fused32-r2.c",
+            "reference/fused32.c",
+            "reference/fp32-tininess.h",
+            "reference/fused32.h",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/FP32_RNE_FOLD_V1.md",
+          "cases": "operators/cases/gemm/fp32-numeric.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_numeric_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_numeric_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-rne-fold-v1"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "bf16-f32-exact-v1",
+          "case_id": 9201,
+          "fixture_generator": "operators/reference/bf16_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_bf16.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py"
+          ],
+          "contract": "operators/docs/BF16_EXACT_CONTRACT.md",
+          "cases": "operators/cases/gemm/bf16-exact.json",
+          "sources": [
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/bf16_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/bf16_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "bf16-f32-exact-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "bf16-f32-rne-fold-v1",
+          "case_id": 9221,
+          "fixture_generator": "operators/reference/bf16_numeric_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_bf16.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/bf16_fold.py",
+            "operators/reference/fp32_fold.py",
+            "operators/cases/bf16-rne-witnesses.json",
+            "scripts/ieee_tininess.py",
+            "scripts/test_fused32.py",
+            "scripts/test_exponent32.py",
+            "scripts/test_sqrt32.py",
+            "reference/fused32-r2.c",
+            "reference/fused32.c",
+            "reference/fp32-tininess.h",
+            "reference/fused32.h",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/BF16_RNE_FOLD_V1.md",
+          "cases": "operators/cases/gemm/bf16-numeric.json",
+          "sources": [
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/bf16_numeric_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/bf16_numeric_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "bf16-f32-rne-fold-v1"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "bf16-state-v1",
+          "case_id": 9211,
+          "fixture_generator": "operators/reference/bf16_state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_bf16.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/BF16_STATE_V1.md",
+          "cases": "operators/cases/gemm/bf16-state.json",
+          "sources": [
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/bf16_state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/bf16_state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "bf16-state-fcsr"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-state-v3",
+          "case_id": 9181,
+          "fixture_generator": "operators/reference/fp32_state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/FP32_STATE_V3.md",
+          "cases": "operators/cases/gemm/fp32-state.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-state-fcsr"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-tail-probe-v1",
+          "case_id": 9171,
+          "fixture_generator": "operators/reference/fp32_tail_probe.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/fp32_fixtures.py",
+            "operators/reference/floating_exact.py",
+            "operators/reference/geometry_fixtures.py",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/FP32_TAIL_FOLLOWUP.md",
+          "cases": "operators/cases/gemm/fp32-tail-probe.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-rne-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-exact-v1",
+          "case_id": 9161,
+          "fixture_generator": "operators/reference/fp32_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py",
+            "operators/reference/geometry_fixtures.py",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/FP32_EXACT_CONTRACT.md",
+          "cases": "operators/cases/gemm/fp32-exact.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-exact-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "widen8-state-v2",
+          "case_id": 9151,
+          "fixture_generator": "operators/reference/widen8_state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_i32.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/WIDEN8_CONTRACT.md",
+          "cases": "operators/cases/gemm/widen8-state.json",
+          "sources": [
+            "operators/common/validate_i8.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/tests/widen8_state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/tests/widen8_state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "widen8-i32-v1",
+          "case_id": 9141,
+          "fixture_generator": "operators/reference/widen8_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_i32.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/WIDEN8_CONTRACT.md",
+          "cases": "operators/cases/gemm/widen8.json",
+          "sources": [
+            "operators/common/validate_i8.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/tests/widen8_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/tests/widen8_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-numeric-v4",
+          "case_id": 9131,
+          "fixture_generator": "operators/reference/numeric_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py",
+            "operators/reference/geometry_fixtures.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemm/i32-numeric.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-state-v3",
+          "case_id": 9121,
+          "fixture_generator": "operators/reference/state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemm/i32-state.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/tests/state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-geometry-v2",
+          "case_id": 9111,
+          "fixture_generator": "operators/reference/geometry_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemm/i32-geometry.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-exact-v1",
+          "case_id": 9101,
+          "fixture_generator": "operators/reference/matrix_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemm/i32.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "platform-guards-v1",
+          "case_id": 9241,
+          "fixture_generator": "operators/reference/platform_guard_fixtures.py",
+          "defines": {
+            "OP_GEMV": 0
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/pack_i32.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_f32.h",
+            "operators/common/pack_bf16.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py",
+            "operators/reference/state_edges_fixtures.py",
+            "scripts/spike_operator_guard_adapter.py",
+            "scripts/operator_platform_guards.py",
+            "testsuite/ameopguard/ameopguard.exp"
+          ],
+          "contract": "operators/docs/PLATFORM_GUARD_PLAN.md",
+          "cases": "operators/cases/gemm/platform-guards.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/validate_i8.c",
+            "operators/common/validate_f32.c",
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/platform_guard_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "operator-platform-guards"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ],
+          "harness": "operators/tests/platform_guard_harness.c",
+          "cxx_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/platform_guard_driver.c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gemv",
+      "description": "Matrix-vector correctness baseline",
+      "variants": [
+        {
+          "id": "state-edges-all-v1",
+          "case_id": 9232,
+          "fixture_generator": "operators/reference/state_edges_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/pack_i32.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_f32.h",
+            "operators/common/pack_bf16.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/STATE_EDGES_V1.md",
+          "cases": "operators/cases/gemv/state-edges.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/validate_i8.c",
+            "operators/common/validate_f32.c",
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/state_edges_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/state_edges_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "operator-state-edges-fcsr"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm",
+            "madd.ew"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-rne-fold-v1",
+          "case_id": 9192,
+          "fixture_generator": "operators/reference/fp32_numeric_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/fp32_fold.py",
+            "operators/cases/fp32-rne-witnesses.json",
+            "scripts/ieee_tininess.py",
+            "scripts/test_fused32.py",
+            "scripts/test_exponent32.py",
+            "scripts/test_sqrt32.py",
+            "reference/fused32-r2.c",
+            "reference/fused32.c",
+            "reference/fp32-tininess.h",
+            "reference/fused32.h",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/FP32_RNE_FOLD_V1.md",
+          "cases": "operators/cases/gemv/fp32-numeric.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_numeric_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_numeric_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-rne-fold-v1"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "bf16-f32-exact-v1",
+          "case_id": 9202,
+          "fixture_generator": "operators/reference/bf16_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_bf16.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py"
+          ],
+          "contract": "operators/docs/BF16_EXACT_CONTRACT.md",
+          "cases": "operators/cases/gemv/bf16-exact.json",
+          "sources": [
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/bf16_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/bf16_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "bf16-f32-exact-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "bf16-f32-rne-fold-v1",
+          "case_id": 9222,
+          "fixture_generator": "operators/reference/bf16_numeric_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_bf16.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/bf16_fold.py",
+            "operators/reference/fp32_fold.py",
+            "operators/cases/bf16-rne-witnesses.json",
+            "scripts/ieee_tininess.py",
+            "scripts/test_fused32.py",
+            "scripts/test_exponent32.py",
+            "scripts/test_sqrt32.py",
+            "reference/fused32-r2.c",
+            "reference/fused32.c",
+            "reference/fp32-tininess.h",
+            "reference/fused32.h",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/BF16_RNE_FOLD_V1.md",
+          "cases": "operators/cases/gemv/bf16-numeric.json",
+          "sources": [
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/bf16_numeric_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/bf16_numeric_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "bf16-f32-rne-fold-v1"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "bf16-state-v1",
+          "case_id": 9212,
+          "fixture_generator": "operators/reference/bf16_state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_bf16.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/BF16_STATE_V1.md",
+          "cases": "operators/cases/gemv/bf16-state.json",
+          "sources": [
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/bf16_state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/bf16_state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "bf16-state-fcsr"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-state-v3",
+          "case_id": 9182,
+          "fixture_generator": "operators/reference/fp32_state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py"
+          ],
+          "contract": "operators/docs/FP32_STATE_V3.md",
+          "cases": "operators/cases/gemv/fp32-state.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-state-fcsr"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-tail-probe-v1",
+          "case_id": 9172,
+          "fixture_generator": "operators/reference/fp32_tail_probe.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/fp32_fixtures.py",
+            "operators/reference/floating_exact.py",
+            "operators/reference/geometry_fixtures.py",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/FP32_TAIL_FOLLOWUP.md",
+          "cases": "operators/cases/gemv/fp32-tail-probe.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-rne-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "fp32-exact-v1",
+          "case_id": 9162,
+          "fixture_generator": "operators/reference/fp32_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/common/internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/pack_f32.h",
+            "operators/reference/floating_exact.py",
+            "operators/reference/geometry_fixtures.py",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/FP32_EXACT_CONTRACT.md",
+          "cases": "operators/cases/gemv/fp32-exact.json",
+          "sources": [
+            "operators/common/validate_f32.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/f32.c",
+            "operators/tests/fp32_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "fp32-exact-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "widen8-state-v2",
+          "case_id": 9152,
+          "fixture_generator": "operators/reference/widen8_state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_i32.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/WIDEN8_CONTRACT.md",
+          "cases": "operators/cases/gemv/widen8-state.json",
+          "sources": [
+            "operators/common/validate_i8.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/tests/widen8_state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/tests/widen8_state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "widen8-i32-v1",
+          "case_id": 9142,
+          "fixture_generator": "operators/reference/widen8_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_i32.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/WIDEN8_CONTRACT.md",
+          "cases": "operators/cases/gemv/widen8.json",
+          "sources": [
+            "operators/common/validate_i8.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/tests/widen8_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/tests/widen8_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-numeric-v4",
+          "case_id": 9132,
+          "fixture_generator": "operators/reference/numeric_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py",
+            "operators/reference/geometry_fixtures.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemv/i32-numeric.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-state-v3",
+          "case_id": 9122,
+          "fixture_generator": "operators/reference/state_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemv/i32-state.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/state_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/tests/state_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-geometry-v2",
+          "case_id": 9112,
+          "fixture_generator": "operators/reference/geometry_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemv/i32-geometry.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/tests/geometry_driver.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "i32-exact-v1",
+          "case_id": 9102,
+          "fixture_generator": "operators/reference/matrix_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/common/internal.h",
+            "operators/common/pack_i32.h",
+            "operators/reference/integer.py"
+          ],
+          "contract": "operators/docs/INTEGER_CONTRACT.md",
+          "cases": "operators/cases/gemv/i32.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/tests/driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "u32-rmcm",
+            "i3k-int-matmul"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ]
+        },
+        {
+          "id": "platform-guards-v1",
+          "case_id": 9242,
+          "fixture_generator": "operators/reference/platform_guard_fixtures.py",
+          "defines": {
+            "OP_GEMV": 1
+          },
+          "inputs": [
+            "operators/include/ame_ops.h",
+            "operators/include/ame_ops_i8.h",
+            "operators/include/ame_ops_f32.h",
+            "operators/include/ame_ops_bf16.h",
+            "operators/common/internal.h",
+            "operators/common/i8_internal.h",
+            "operators/common/f32_internal.h",
+            "operators/common/bf16_internal.h",
+            "operators/common/pack_i32.h",
+            "operators/common/pack_i8.h",
+            "operators/common/pack_f32.h",
+            "operators/common/pack_bf16.h",
+            "operators/kernels/gemm/widen8.inc",
+            "operators/reference/floating_exact.py",
+            "scripts/spike_fpstate_adapter.py",
+            "operators/reference/state_edges_fixtures.py",
+            "scripts/spike_operator_guard_adapter.py",
+            "scripts/operator_platform_guards.py",
+            "testsuite/ameopguard/ameopguard.exp"
+          ],
+          "contract": "operators/docs/PLATFORM_GUARD_PLAN.md",
+          "cases": "operators/cases/gemv/platform-guards.json",
+          "sources": [
+            "operators/common/validate.c",
+            "operators/common/validate_i8.c",
+            "operators/common/validate_f32.c",
+            "operators/common/validate_bf16.c",
+            "operators/common/platform.c",
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/kernels/gemv/i32.c",
+            "operators/kernels/gemv/i8.c",
+            "operators/kernels/gemv/f32.c",
+            "operators/kernels/gemv/bf16.c",
+            "operators/tests/platform_guard_driver.c"
+          ],
+          "typed_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c"
+          ],
+          "capabilities": [
+            "csr-local-v1",
+            "operator-platform-guards"
+          ],
+          "scan": [
+            "mmulacc.2d",
+            "mls.rm",
+            "mss.rm"
+          ],
+          "profiles": [
+            {
+              "uds": 32,
+              "mregs": 16,
+              "accregs": 4
+            }
+          ],
+          "harness": "operators/tests/platform_guard_harness.c",
+          "cxx_sources": [
+            "operators/kernels/gemm/i32.c",
+            "operators/kernels/gemm/i8.c",
+            "operators/kernels/gemm/u8.c",
+            "operators/kernels/gemm/f32.c",
+            "operators/kernels/gemm/bf16.c",
+            "operators/tests/platform_guard_driver.c"
+          ]
+        }
+      ]
+    }
+  ]
+}

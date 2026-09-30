@@ -1,0 +1,1 @@
+{"operator": "gemm", "contract": "i32-state-v3"}

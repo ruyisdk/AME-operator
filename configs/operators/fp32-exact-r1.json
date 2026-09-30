@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "toolchain_root": "..",
+  "gcc_build": "gcc-build/gcc",
+  "binutils_build": "binutils-build",
+  "gcc_include": "gcc/gcc/config/riscv",
+  "dejagnu": "dejagnu/runtest",
+  "profiles": [
+    {
+      "uds": 32,
+      "mregs": 16,
+      "accregs": 4
+    }
+  ],
+  "xlens": [
+    32,
+    64
+  ],
+  "optimizations": [
+    "O0",
+    "O2"
+  ],
+  "languages": [
+    "c",
+    "c++"
+  ],
+  "max_n": 128,
+  "seed": 123456789,
+  "timeout_seconds": 120,
+  "address_space_mib": 4096,
+  "csr_map": "ame-local-810-811-812-v1",
+  "registry": "operators/registry.json",
+  "operators": [
+    "gemm",
+    "gemv"
+  ],
+  "variant": "fp32-exact-v1"
+}

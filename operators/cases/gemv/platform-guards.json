@@ -1,0 +1,4 @@
+{
+  "operator": "gemv",
+  "contract": "platform-guards-v1"
+}

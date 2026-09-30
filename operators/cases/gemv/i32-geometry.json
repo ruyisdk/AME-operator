@@ -1,0 +1,6 @@
+{
+  "operator": "gemv",
+  "contract": "i32-geometry-v2",
+  "tiles": [4, 8, 16, 32, 64, 128],
+  "seed": 89101
+}

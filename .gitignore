@@ -1,0 +1,6 @@
+/build/
+/results/
+/external/
+*.local.json
+__pycache__/
+*.py[cod]

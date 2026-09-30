@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "backend": "spike",
+  "revision": "configured-model",
+  "command": [
+    "scripts/spike_adapter.py",
+    "--model",
+    "build/model/model.json"
+  ],
+  "timeout_seconds": 120,
+  "csr_map": "ame-local-810-811-812-v1",
+  "xlen": 32,
+  "uds": 32,
+  "mregs": 16,
+  "accregs": 4,
+  "n_values": [
+    4,
+    128
+  ],
+  "capabilities": [
+    "csr-local-v1",
+    "u32-rmcm",
+    "i3k-int-matmul"
+  ],
+  "entry_contract": "m-mode-single-hart-ms-enabled-unowned-v1"
+}

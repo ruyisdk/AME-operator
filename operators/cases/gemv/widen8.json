@@ -1,0 +1,4 @@
+{
+  "operator": "gemv",
+  "contract": "widen8-i32-v1"
+}

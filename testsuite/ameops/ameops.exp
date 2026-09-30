@@ -1,0 +1,27 @@
+set root $env(AME_ROOT)
+set python $env(AME_PYTHON)
+set output $env(AME_OUTPUT)
+proc ops_invoke {label command} {
+    set caught [catch {exec {*}$command 2>@1} message options]
+    send_log "$command\n$message\n"
+    if {$caught} { fail $label; return 0 }
+    pass $label
+    return 1
+}
+set stream [open $env(AME_KEYS) r]
+set keys [split [string trim [read $stream]] "\n"]
+close $stream
+foreach key $keys {
+    if {$env(AME_MODE) eq "build"} {
+        ops_invoke "build $key" [list $python $root/scripts/operators.py build \
+            --config $env(AME_CONFIG) --key $key --out "$output/build/$key"]
+    } else {
+        set ns [exec $python -c {import json,sys; print(*json.load(open(sys.argv[1]))["n_values"])} \
+            $env(AME_PLATFORM)]
+        foreach n $ns {
+            ops_invoke "execute $key N=$n" [list $python $root/scripts/operators.py run \
+                --config $env(AME_CONFIG) --artifact "$env(AME_ARTIFACTS)/build/$key" \
+                --platform $env(AME_PLATFORM) --n $n --out "$output/execute/$key/n$n"]
+        }
+    }
+}

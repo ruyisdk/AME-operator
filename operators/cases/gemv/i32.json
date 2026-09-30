@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "operator": "gemv",
+  "contract": "i32-exact-v1",
+  "cases": [
+    {
+      "name": "shape-0-1-3-set",
+      "m": 0,
+      "n": 1,
+      "k": 3,
+      "lda": 5,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 19
+    },
+    {
+      "name": "shape-0-1-3-add",
+      "m": 0,
+      "n": 1,
+      "k": 3,
+      "lda": 5,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 19
+    },
+    {
+      "name": "shape-3-1-0-set",
+      "m": 3,
+      "n": 1,
+      "k": 0,
+      "lda": 2,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 30
+    },
+    {
+      "name": "shape-3-1-0-add",
+      "m": 3,
+      "n": 1,
+      "k": 0,
+      "lda": 2,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 30
+    },
+    {
+      "name": "shape-1-1-1-set",
+      "m": 1,
+      "n": 1,
+      "k": 1,
+      "lda": 3,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 41
+    },
+    {
+      "name": "shape-1-1-1-add",
+      "m": 1,
+      "n": 1,
+      "k": 1,
+      "lda": 3,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 41
+    },
+    {
+      "name": "shape-3-1-7-set",
+      "m": 3,
+      "n": 1,
+      "k": 7,
+      "lda": 9,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 52
+    },
+    {
+      "name": "shape-3-1-7-add",
+      "m": 3,
+      "n": 1,
+      "k": 7,
+      "lda": 9,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 52
+    },
+    {
+      "name": "shape-8-1-8-set",
+      "m": 8,
+      "n": 1,
+      "k": 8,
+      "lda": 10,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 63
+    },
+    {
+      "name": "shape-8-1-8-add",
+      "m": 8,
+      "n": 1,
+      "k": 8,
+      "lda": 10,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 63
+    },
+    {
+      "name": "shape-9-1-11-set",
+      "m": 9,
+      "n": 1,
+      "k": 11,
+      "lda": 13,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 74
+    },
+    {
+      "name": "shape-9-1-11-add",
+      "m": 9,
+      "n": 1,
+      "k": 11,
+      "lda": 13,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 74
+    },
+    {
+      "name": "shape-17-1-19-set",
+      "m": 17,
+      "n": 1,
+      "k": 19,
+      "lda": 21,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 85
+    },
+    {
+      "name": "shape-17-1-19-add",
+      "m": 17,
+      "n": 1,
+      "k": 19,
+      "lda": 21,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 85
+    },
+    {
+      "name": "shape-7-1-17-set",
+      "m": 7,
+      "n": 1,
+      "k": 17,
+      "lda": 19,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 0,
+      "seed": 96
+    },
+    {
+      "name": "shape-7-1-17-add",
+      "m": 7,
+      "n": 1,
+      "k": 17,
+      "lda": 19,
+      "ldb": 1,
+      "ldc": 1,
+      "accumulate": 1,
+      "seed": 96
+    }
+  ]
+}

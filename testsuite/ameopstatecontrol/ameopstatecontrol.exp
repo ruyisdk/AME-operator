@@ -1,0 +1,21 @@
+set root $env(AME_ROOT)
+set python $env(AME_PYTHON)
+set stream [open $env(AME_KEYS) r]
+set keys [split [string trim [read $stream]] "\n"]
+close $stream
+foreach key $keys {
+    set artifact "$env(AME_ARTIFACTS)/$key"
+    foreach n {4 128} {
+        set dest "$env(AME_OUTPUT)/execute/$key/n$n"
+        set command [list $python $root/scripts/operator_state_controls.py run --artifact $artifact \
+            --platform $env(AME_PLATFORM) --n $n --out $dest]
+        set caught [catch {exec {*}$command 2>@1} message options]
+        send_log "$command\n$message\n"
+        if {$caught} { fail "execute $key N=$n" } else { pass "execute $key N=$n" }
+        set command [list $python $root/scripts/operator_state_controls.py verify \
+            --artifact $artifact --n $n --out $dest]
+        set caught [catch {exec {*}$command 2>@1} message options]
+        send_log "$command\n$message\n"
+        if {$caught} { fail "verify $key N=$n" } else { pass "verify $key N=$n" }
+    }
+}

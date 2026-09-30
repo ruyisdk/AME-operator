@@ -1,0 +1,19 @@
+set root $env(AME_ROOT)
+set python $env(AME_PYTHON)
+set output $env(AME_OUTPUT)
+set stream [open $env(AME_KEYS) r]
+set keys [split [string trim [read $stream]] "\n"]
+close $stream
+set stream [open $env(AME_HARDWARE) r]
+set hardware [split [string trim [read $stream]] "\n"]
+close $stream
+foreach key $keys {
+    foreach hw $hardware {
+        set command [list $python $root/scripts/operator_platform_guards.py run \
+            --artifact "$env(AME_ARTIFACTS)/$key" --hardware $hw \
+            --out "$output/execute/$key/$hw"]
+        set caught [catch {exec {*}$command 2>@1} message options]
+        send_log "$command\n$message\n"
+        if {$caught} { fail "guard $key $hw" } else { pass "guard $key $hw" }
+    }
+}
