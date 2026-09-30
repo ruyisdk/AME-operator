@@ -1,0 +1,202 @@
+{
+  "builds": 80,
+  "clean_export_host_tests": 314,
+  "date": "2026-09-30",
+  "executions": 256,
+  "host_tests": 314,
+  "production_source_sha256": {
+    "operators/common/bf16_internal.h": "7c190134cf4ddde1043aa3943d6993e10c122afda480daeb08564d85f518ea34",
+    "operators/common/f32_internal.h": "4cf359cf62448b97959883f11305c85684f6c34f9b7758350b5bf2d67e6a6867",
+    "operators/common/i8_internal.h": "2f6e40cb83e63570a9f0461a199308c9daa846e003e491c0be0273cef78e4381",
+    "operators/common/internal.h": "9c82a64bb623fed9c89b1fc962fe24d807f2fa6d8aa808fdf7c0c9831935a2a3",
+    "operators/common/pack_bf16.h": "85187861dd4d670c7bfebcd82bfc0239768272600cde619ba38c839bca38c026",
+    "operators/common/pack_f32.h": "6a72a22f401d3cebd4963e874c8d047ae5eedc18a151c3312a3cfc493c71ca52",
+    "operators/common/pack_i32.h": "a72534e1842ad4fbf119b0fd542d9d39e8373996321cd8bd1e0504f0f50b05c9",
+    "operators/common/pack_i8.h": "badb5809fce0fddf18bf987e10f3cc6fcabfccdc31ef7680df8f8808dac23a22",
+    "operators/common/platform.c": "dab4548e2cd64a568fdc3fe51465cb4c31463a85db05deafb4741a6e4dc811d2",
+    "operators/common/validate.c": "961c137af77aa9849a4367241850ffe01bb01077487fcae6a0e1ad7e6ffdc557",
+    "operators/common/validate_bf16.c": "e81946ef4bb11595e557314ef0ed7f670bf4273b3ec0aac5519710ddf9a3d211",
+    "operators/common/validate_f32.c": "1a3046e4ddf33b6dbedb3687569a98b6a0ca73d9145e2897d75ebeca746c2a15",
+    "operators/common/validate_i8.c": "d3da6f435782bba7874d442266629c499077f90774be353ffd8e32eec341e54d",
+    "operators/include/ame_ops.h": "a8e3cd558a540922b97f56f150b62013f20d22ba772dbf3fc5254a029fef005c",
+    "operators/include/ame_ops_bf16.h": "126e75e8e29782789d82c5d199a750d4060f44e12c808037bd3ace42cfdf898c",
+    "operators/include/ame_ops_f32.h": "69ade98e9e41eac4f3f59de5ca4e4dd5a5733f2d062761e977c4ab91be029d58",
+    "operators/include/ame_ops_i8.h": "58678c2dee820648bdeb7be320cbee51016400281324f0f03d8cc16573e8d069",
+    "operators/kernels/gemm/bf16.c": "c8d86307750a114b34f65473999b0d7f917ce01d3b14ce285e35bc872077affd",
+    "operators/kernels/gemm/f32.c": "1774edf006c611bd879eafb24fbb9410929fdd122d72aea3837271fc44525784",
+    "operators/kernels/gemm/i32.c": "0d27f18875ccdafa7705aa906042951fc8766a588499f19f6768c3199acb6ea0",
+    "operators/kernels/gemm/i8.c": "0019cefb25ab54f3ad3ada1b4b5dc8586c865239e9625b96391c8738d8178894",
+    "operators/kernels/gemm/u8.c": "2924ad62e096bdc513531c492e7d4d134f6d755df3f1008fccc23c28109e3698",
+    "operators/kernels/gemm/widen8.inc": "1769e80dc8ef6132f75c2c73ac001ebc819be29b4c09d554f16e276481126d82",
+    "operators/kernels/gemv/bf16.c": "7b150de37fb512a7015e842847348a4f311006897487cb8d320002b3a6080a13",
+    "operators/kernels/gemv/f32.c": "9fc1467e410856e8a3e87cf36f12473a44b8ded43090aef1a4d64806b996ce8d",
+    "operators/kernels/gemv/i32.c": "13c64d1aa8eb585de3c278006b1494ae15d701d3d1896e2aa182549b9a4d6643",
+    "operators/kernels/gemv/i8.c": "e93a8831b70fcece48822fec3978606f9ef99f6fc8f8775f282d0f684849b65c"
+  },
+  "reference_tests": 15,
+  "schema": 1,
+  "spike": {
+    "revision": "ead03459a3d9db96788d2d2fe626d0b9f3bcd367+local-cb7a408bb8b2",
+    "sha256": "20b892a23129d3e6aa092ddb9cd5c5c042199cceace7076e546bd55b6bef94ff"
+  },
+  "suites": {
+    "bf16-numeric": {
+      "builds": 16,
+      "elf_sha256": {
+        "ops-gemm-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O0-c": "206b8efa0e797326c8e89a6b8ce5495ac2d4829049d5d1a1744fc8e837846270",
+        "ops-gemm-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O0-cxx": "c0537610b3635c14f04635ebe89a70d72a96caf3671c95ea19bbeb13615e0fde",
+        "ops-gemm-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O2-c": "466b49866f085f3aa6a22010f976898caaba93b74cd780c99763b1be9c195678",
+        "ops-gemm-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O2-cxx": "75b9888cb7e51246bfbe5d62be9f0bb7c7982d58d8836e155a809fa3e69e56d6",
+        "ops-gemm-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O0-c": "9805b12c2181ceac9e4e3f49eae7bfb4793af35513fd6911405b6a78ea08c4fb",
+        "ops-gemm-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O0-cxx": "b7c64f505aa5a37c4d2a8b1b779152cc60e562b1f0555f206d344cb15a54b5df",
+        "ops-gemm-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O2-c": "ed61910b860cba9d9e09be6baad83ccf34e5ad48907f72ca7e5585634e01faf3",
+        "ops-gemm-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O2-cxx": "e445b194db4e7e355ef6969fdfabe6dc72578bdd46a7deee3b5d11951a12b73f",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O0-c": "8d982d75226bd6318f690c53d31c494dd822a0514afb58f606898a4b361bf68b",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O0-cxx": "8f40baab80aace2d0eb27379ed2b4d58e1348685174f023fb8b130a59c5834d0",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O2-c": "8265ab7a832ab9e2b8312b97c439bf85e60ca1d73285015474532a6ba9fd7897",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv32-u32-m16-a4-O2-cxx": "e11547928677cb46d039f1ac8dae20410cf0c4a21f39c17ec3a0268c04589269",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O0-c": "a2ca6771a486f5b545ea8a10b11344a7baca237b1fa11d213a3f5ff243712f8c",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O0-cxx": "cfbc0698543a00d92f09c87bf46c95382902e8d7668b821f81e08a70ce98a3b6",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O2-c": "c6c013a9733edbd445906efb080ca9788601eed22d0c3d203911f6d0cc0337fd",
+        "ops-gemv-bf16-f32-rne-fold-v1-rv64-u32-m16-a4-O2-cxx": "eb9096e8afd152a7cfcd44c6ee8d1d11f2573144ebe5a373da8182c21336296b"
+      },
+      "executions": 32,
+      "stage_counts": {
+        "smoke-rv32": 16,
+        "smoke-rv64": 16
+      },
+      "status": "SMOKE_PASS",
+      "summary_sha256": "7334b0f322159a781f01da5cc29b94c3cac4aa69f8ec089b35772f2c4e7002be",
+      "variant": "bf16-f32-rne-fold-v1"
+    },
+    "fp32-numeric": {
+      "builds": 16,
+      "elf_sha256": {
+        "ops-gemm-fp32-rne-fold-v1-rv32-u32-m16-a4-O0-c": "9f3948c7163338a8d3d36cf5502bc896944ac317735432f02a1854c762815533",
+        "ops-gemm-fp32-rne-fold-v1-rv32-u32-m16-a4-O0-cxx": "e039d02a56dba1d389f810d14ecf4fc2b5b93fc1cba4127a541f483ffb12dab1",
+        "ops-gemm-fp32-rne-fold-v1-rv32-u32-m16-a4-O2-c": "a8d0d29c3f7265b29e5d874735dce6b47cb9eda684d6171a6abdb0283694cff2",
+        "ops-gemm-fp32-rne-fold-v1-rv32-u32-m16-a4-O2-cxx": "e7950e6aaffac41caa3062d0df4cb0a7b93838bee86bcf701ff75432e3766807",
+        "ops-gemm-fp32-rne-fold-v1-rv64-u32-m16-a4-O0-c": "e15a89f8c11c0074ea44e47bd75dff19ec1628fddb4f199eba1d8a15267090e3",
+        "ops-gemm-fp32-rne-fold-v1-rv64-u32-m16-a4-O0-cxx": "0e737394834cdaa39e6dd51dbfc62863790f37a828d9d8a2ba044afea67b8538",
+        "ops-gemm-fp32-rne-fold-v1-rv64-u32-m16-a4-O2-c": "d501c2b50c84eae7b8971f02dbe0e310ab60bfbc6da2ac5ce5ea04251bea63f5",
+        "ops-gemm-fp32-rne-fold-v1-rv64-u32-m16-a4-O2-cxx": "6b0ad6e792208db0dce59773e642861cb1eecd8f64f5b6754ba02087ebf14257",
+        "ops-gemv-fp32-rne-fold-v1-rv32-u32-m16-a4-O0-c": "a5f3a0da9b1657f7b6b0e44cf1f3bfa6fd352e39f22e219fdcc8fc8ecc0946f0",
+        "ops-gemv-fp32-rne-fold-v1-rv32-u32-m16-a4-O0-cxx": "83c4b5082cc6af46ea15746394366186fbc7b91c66ef1e7443dc253c40ec55bf",
+        "ops-gemv-fp32-rne-fold-v1-rv32-u32-m16-a4-O2-c": "825919e22d47d277a68e4c25018b34db5e4c26fcdeb63e03bb6e08c83494c96e",
+        "ops-gemv-fp32-rne-fold-v1-rv32-u32-m16-a4-O2-cxx": "15f18d53a1043e04b4f5fe5f4180902b2e4346d8c5e771e935e973742ab0794d",
+        "ops-gemv-fp32-rne-fold-v1-rv64-u32-m16-a4-O0-c": "063b98e5a5cb8db6b6638629c769c39f6c245cd5e71286ae1e8a780d383f14e4",
+        "ops-gemv-fp32-rne-fold-v1-rv64-u32-m16-a4-O0-cxx": "f45b11807a8f278cbb98277933e1b38b48f53bcde7716b4042100d7b249cecee",
+        "ops-gemv-fp32-rne-fold-v1-rv64-u32-m16-a4-O2-c": "d704a29ad599f170f1195c1fe7b116c10798619ba0248c9ac7727be8a364073f",
+        "ops-gemv-fp32-rne-fold-v1-rv64-u32-m16-a4-O2-cxx": "496998f47c3cdb00be4ac3d5fff5907df343a38f9e409dcdeb3cb9a29b1f7811"
+      },
+      "executions": 32,
+      "stage_counts": {
+        "smoke-rv32": 16,
+        "smoke-rv64": 16
+      },
+      "status": "SMOKE_PASS",
+      "summary_sha256": "5859c756c80f866bb5b31038346f6df1c74d7f0e8f828be11b34c91ad42319a1",
+      "variant": "fp32-rne-fold-v1"
+    },
+    "integer-numeric": {
+      "builds": 16,
+      "elf_sha256": {
+        "ops-gemm-i32-numeric-v4-rv32-u32-m16-a4-O0-c": "9e7105fdcc1ad072c8ed30279194f857ee479b02e544613e748abb690fcf467d",
+        "ops-gemm-i32-numeric-v4-rv32-u32-m16-a4-O0-cxx": "06328d6f156109a3a2a6c4654324b55a18e89cb508648a3aea9430157b6fcf69",
+        "ops-gemm-i32-numeric-v4-rv32-u32-m16-a4-O2-c": "18ea22f012f51b8c3ec808c91d4dff40f5a2605dd0a755d0dfce0386df9531eb",
+        "ops-gemm-i32-numeric-v4-rv32-u32-m16-a4-O2-cxx": "5fc376f2f283b4165a4fa35001421c7c18eda0453d030b1e17df08c274a826ce",
+        "ops-gemm-i32-numeric-v4-rv64-u32-m16-a4-O0-c": "e30a043f04f0ac4a0caeb43cbfdb97e0bced871e5233f87922d2afd47fbeaebc",
+        "ops-gemm-i32-numeric-v4-rv64-u32-m16-a4-O0-cxx": "dba9ea99672e25897bdf7f2e33d8cb714c4174b7ed3f2b309bd88cbbb0ce402c",
+        "ops-gemm-i32-numeric-v4-rv64-u32-m16-a4-O2-c": "df00c9dc2fa78aa4afeb427d42c4b77a882e6e0f6f420874646fecd4fd9480e1",
+        "ops-gemm-i32-numeric-v4-rv64-u32-m16-a4-O2-cxx": "06f30c42582f14447c493579031095aa27c4652206c6761c52f2a0aa4e0a0d46",
+        "ops-gemv-i32-numeric-v4-rv32-u32-m16-a4-O0-c": "36170453257e749100ea21014db8123f4049ef98d10c67f5575ebd99f2cb27a3",
+        "ops-gemv-i32-numeric-v4-rv32-u32-m16-a4-O0-cxx": "a36c6020e1a8587aac7d771c5264381cb880dd6fab4e45f23c70ff10e80d4474",
+        "ops-gemv-i32-numeric-v4-rv32-u32-m16-a4-O2-c": "360eab0391637cfac0dcf9e86d345443b06c6c89a3bf4d8911360b3b170a48ea",
+        "ops-gemv-i32-numeric-v4-rv32-u32-m16-a4-O2-cxx": "138c4921d7fb542bac54af3570b0518d783db0410910ea72726d6fe6ccbc54e7",
+        "ops-gemv-i32-numeric-v4-rv64-u32-m16-a4-O0-c": "6655ac88542c6ddc48040090f642b5721f561ba426bf4d9efbfb90a8c5b83dc3",
+        "ops-gemv-i32-numeric-v4-rv64-u32-m16-a4-O0-cxx": "7b62c07653b0e03abf2b8b3f4ac878ae308dbf17873070e160f619e934910dc4",
+        "ops-gemv-i32-numeric-v4-rv64-u32-m16-a4-O2-c": "c4e241ca792271e7edec00a2db96859ff7d53e6263e31faa953c7f3642af6235",
+        "ops-gemv-i32-numeric-v4-rv64-u32-m16-a4-O2-cxx": "f86580cda0d817d345c742cd0f25dcaca1df35e67aa07b35ac93b9a7075b5efc"
+      },
+      "executions": 32,
+      "stage_counts": {
+        "smoke-rv32": 16,
+        "smoke-rv64": 16
+      },
+      "status": "SMOKE_PASS",
+      "summary_sha256": "40c3cec5c3338c5b08ff6590c2fff36bef2ca4b67e0b6684e96f59fe1d79fe18",
+      "variant": "i32-numeric-v4"
+    },
+    "state-edges-r2": {
+      "builds": 16,
+      "elf_sha256": {
+        "ops-gemm-state-edges-all-v1-rv32-u32-m16-a4-O0-c": "065f5912510f80c2fb5a5b64639b4a70df56d9a6e6106d66da4a263c061c07f2",
+        "ops-gemm-state-edges-all-v1-rv32-u32-m16-a4-O0-cxx": "e3765f5f09a55914a1fd21000bca4d328bf1ae8c98bb1561157436e746ed796e",
+        "ops-gemm-state-edges-all-v1-rv32-u32-m16-a4-O2-c": "702b6ecc1d057e46f9553880aed14543077cbd5157475f2dfe86abd99dad3fe6",
+        "ops-gemm-state-edges-all-v1-rv32-u32-m16-a4-O2-cxx": "bd70db9ec08a5ad698131b8ae9ae3e95d020c120dfc9a8f78b4cf0be5af78e04",
+        "ops-gemm-state-edges-all-v1-rv64-u32-m16-a4-O0-c": "08a0a7f5419a2d64fb86a2c74d17ad9d8cd257b4e796f81cc7f79e92a6206259",
+        "ops-gemm-state-edges-all-v1-rv64-u32-m16-a4-O0-cxx": "a33a3ba81ab367345b8aad24cf181679b04e6badc1d96c46f90de33bca613d6e",
+        "ops-gemm-state-edges-all-v1-rv64-u32-m16-a4-O2-c": "0a248c143644b608d6d7c697d15c62222deb3b3e8859eed23be31444981e3934",
+        "ops-gemm-state-edges-all-v1-rv64-u32-m16-a4-O2-cxx": "5f2bdf87519b8d70bfd81ed8c5dc1d4b792abb4a67928f6e1033b4c8b605fcc6",
+        "ops-gemv-state-edges-all-v1-rv32-u32-m16-a4-O0-c": "2038fff7b23d63b986915045cb20eda0f331607a663e8c5c025e1b648676c8c7",
+        "ops-gemv-state-edges-all-v1-rv32-u32-m16-a4-O0-cxx": "f25694a98fe001e77cb2204f8186105cb8fd453f0194f669a97e9f2f83b6b254",
+        "ops-gemv-state-edges-all-v1-rv32-u32-m16-a4-O2-c": "bcc3b9c1529fbf14a19562de48493bf2d6935a7d6745a2310d34ee37171e2f90",
+        "ops-gemv-state-edges-all-v1-rv32-u32-m16-a4-O2-cxx": "d1d69b2f46b8607751f5de502877cbbc3e50ecd10d1ace5fda8f200ed59b3bfa",
+        "ops-gemv-state-edges-all-v1-rv64-u32-m16-a4-O0-c": "aa49a187e06506ac25eaba83e573e645ac98915dfc52cf568ea68702cb4c64e4",
+        "ops-gemv-state-edges-all-v1-rv64-u32-m16-a4-O0-cxx": "d6cfbf2a84fdff5490dd013306c2b4773e3eb4188cf79de1ab6eb1c0fd01c212",
+        "ops-gemv-state-edges-all-v1-rv64-u32-m16-a4-O2-c": "a9dde6b54c215e42cbe3a19f7091329bddd4447a6ba39f9452171366e5a3aab2",
+        "ops-gemv-state-edges-all-v1-rv64-u32-m16-a4-O2-cxx": "df740942261a3688ecdd1dc12bb46a392260669a0a941c8c3a6b289e50e9a151"
+      },
+      "executions": 128,
+      "stage_counts": {
+        "main-rv32": 48,
+        "main-rv64": 48,
+        "probe-rv32": 16,
+        "probe-rv64": 16
+      },
+      "status": "FULL_PASS",
+      "summary_sha256": "c0eedcd1d7528b79f265aca626373683b544ae99abcafd12441286dc0b33f9bd",
+      "variant": "state-edges-all-v1"
+    },
+    "widen8": {
+      "builds": 16,
+      "elf_sha256": {
+        "ops-gemm-widen8-i32-v1-rv32-u32-m16-a4-O0-c": "a4c1f22a163aa679a0bc4d928a382d8d71c0f6d59286ea9cc629085d10c1d14b",
+        "ops-gemm-widen8-i32-v1-rv32-u32-m16-a4-O0-cxx": "ce23ec2c9b39ee61645daa8548ecf1d861395cee0d06a1f82e8a6982fa508795",
+        "ops-gemm-widen8-i32-v1-rv32-u32-m16-a4-O2-c": "ad10571fd9842ed79b715801dbd38c32d44a19576c8a0faab2dfd4ef5e8fdced",
+        "ops-gemm-widen8-i32-v1-rv32-u32-m16-a4-O2-cxx": "72971907581c07c6206daddc3a03ae365c26a3df6cdcea3502f01e3af2c4d5d4",
+        "ops-gemm-widen8-i32-v1-rv64-u32-m16-a4-O0-c": "baa871a78a9a304e9495d29440e32a95df412b87570ddb81e70ad4c0a83d69de",
+        "ops-gemm-widen8-i32-v1-rv64-u32-m16-a4-O0-cxx": "80d276c8c09c15dd44f981c10a050709c261f72996507dd9c43799ebd1ae4bc9",
+        "ops-gemm-widen8-i32-v1-rv64-u32-m16-a4-O2-c": "25c65acb472b7ca95dbf9a695b14ce3759eceaa8b1b28b09da22734bc7bc7959",
+        "ops-gemm-widen8-i32-v1-rv64-u32-m16-a4-O2-cxx": "596db002c66a9466e4f31364509b85dbd245b886c24ed2d3cee9abdec6d7a8d8",
+        "ops-gemv-widen8-i32-v1-rv32-u32-m16-a4-O0-c": "c84e3a7f3ca0a57e22747a5346d9a81fd324283586e60a460c98db2a2d7d8e08",
+        "ops-gemv-widen8-i32-v1-rv32-u32-m16-a4-O0-cxx": "260ec5ac4d7328d3a5922871ce75f53c44bb4801e7ccabc9e84be4ffc9ad3793",
+        "ops-gemv-widen8-i32-v1-rv32-u32-m16-a4-O2-c": "3d8ddd826d80f6580d655b3056721eaa64fa791516d3a9bf270a3dfb53860b66",
+        "ops-gemv-widen8-i32-v1-rv32-u32-m16-a4-O2-cxx": "b07c73bb6329e87642ddf12f85aaa782da1dee7e75ec48c5f7cd11c63e59015c",
+        "ops-gemv-widen8-i32-v1-rv64-u32-m16-a4-O0-c": "a68c21767d8facc80fa1c6468ddf573b8900a328125fd6472bc0c58e09194436",
+        "ops-gemv-widen8-i32-v1-rv64-u32-m16-a4-O0-cxx": "fc9cd3e62241b76a7f827e946348b4d648b76960217a4c7812da8d80ff2af706",
+        "ops-gemv-widen8-i32-v1-rv64-u32-m16-a4-O2-c": "d8cd975b2a6b023a70a12565c2209bae0276e9deacddda3d6010af073c525609",
+        "ops-gemv-widen8-i32-v1-rv64-u32-m16-a4-O2-cxx": "e8c1c4740fb0dcf7d049970411e77bb159d4d89972f050fa70c668824883cf80"
+      },
+      "executions": 32,
+      "stage_counts": {
+        "smoke-rv32": 16,
+        "smoke-rv64": 16
+      },
+      "status": "SMOKE_PASS",
+      "summary_sha256": "eb44a27419235f3182ccd6247c369088cd5f3e861f89009df47b7697e9cf5243",
+      "variant": "widen8-i32-v1"
+    }
+  },
+  "tool_sha256": {
+    "as-new": "8afdf16ec1da5e10f304b44e7613026f8648100c4acfbe280cbf0c2132013d2f",
+    "cc1": "4e1baab0a6d8aed1211ca85eb57f888d0d1b24fffbf614d0ed72714fb682a474",
+    "cc1plus": "e4aa49c2b8040bca6dd2f6f0d0582da10f22719b3e65077a4b5abf8a58d5868e",
+    "ld-new": "fec4e8a9cd751bac81ad546ef31213721b1ebfaad66a927df6d5ad2b8132f4bc",
+    "nm-new": "52a8fc7c3984fa9fdfafdf6cf7275274cfe99a2e432b508004a2cbc08fe3494a",
+    "objdump": "c43ddff6b5357ff87d8f6d6255917784521a47e52e12b262772646c2c07c5dcf",
+    "readelf": "1ec2b0b7b63af1448681f1a4a5c23ece028b39b553e66a1771f3aa12f66e96e8",
+    "xg++": "a5718c12fc54ad2cc941b6772b65698424d230b65d9826bce32fbdc4491bb5fa",
+    "xgcc": "f29747731dc1737100c6ec78d375235f6796bc533f987dfee685d22fa8ba3e6e"
+  }
+}
