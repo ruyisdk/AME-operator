@@ -1,0 +1,19 @@
+# Local tools and full source archives are distributed separately.
+/toolchain/
+/spike/
+/sources/
+
+# Generated build and teaching outputs.
+/build/
+/dist/
+/logs/
+/results/
+/provenance/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+
+# Local editor state.
+.vscode/
+.idea/

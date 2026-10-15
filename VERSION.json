@@ -1,0 +1,32 @@
+{
+  "delivery": "AME China Summit tutorial",
+  "snapshot_date": "2026-10-15",
+  "directory": "~/ame-tutorial-gcc",
+  "profile": {
+    "xlen": 64,
+    "uds": 32,
+    "mregs": 16,
+    "accregs": 4,
+    "n": 4,
+    "dtype": "INT32",
+    "operation": "C=A*B; NN; row major"
+  },
+  "actual_host": "Ubuntu 24.04.2 LTS / glibc 2.39 / x86_64",
+  "target_host": "Ubuntu 26.04.1 LTS / glibc 2.43 / x86_64",
+  "target_host_validation": "NOT_RUN; user accepted local delivery first",
+  "components": {
+    "gcc": {
+      "revision": "3868ab3aa4b341a5bd2e673602ec0e8bdae74df0",
+      "local_changes": "Source archive includes 4 uncommitted files from the frozen development tree."
+    },
+    "binutils": {
+      "revision": "308ef3af1dcc309392997c20a4b3794679bfcce7"
+    },
+    "spike": {
+      "revision": "e8ecdadfad73d837cbc2c20abf9007b2289a7f3d"
+    },
+    "ame-operator": {
+      "revision": "da2b0d7bd3570e59a8fd11a46987073679efdcac"
+    }
+  }
+}
